@@ -1,6 +1,7 @@
 import argparse
 from scapy.all import sniff, rdpcap
 from parser.packet_capture import parse_packet, format_packet_summary
+from detection.port_scan import detect_port_scan
 
 def arg_parser():
     parser=argparse.ArgumentParser(description='Capture the pcap file and parsinn')
@@ -15,6 +16,10 @@ def packet_process(packet):
     if packet_info is None:
         return 
     print(format_packet_summary(packet_info))
+
+    alert = detect_port_scan(packet_info)
+    if alert:
+        print(f"[ALERT] {alert['message']}")
 
 def live_capture(interface=None):
     sniff(
