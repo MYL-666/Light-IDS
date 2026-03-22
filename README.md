@@ -147,4 +147,4 @@ This project was built to demonstrate:
 # Dashboard Screenshots
 
 <img src='/screenshots/dashboard1.png'>
-<img src='/screenshots/dashboard2.png'
+<img src='/screenshots/dashboard2.png'>
