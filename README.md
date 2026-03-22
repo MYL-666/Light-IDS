@@ -143,3 +143,8 @@ This project was built to demonstrate:
 -rule-based intrusion detection design
 -security logging and analytics workflow
 -full-stack integration from detection engine to dashboard
+
+# Dashboard Screenshots
+
+<img src='/screenshots/dashboard1.png'>
+<img src='/screenshots/dashboard2.png'
