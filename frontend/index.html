@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LightIDS Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>LightIDS</h1>
+          <p>Security Dashboard</p>
+        </div>
+
+        <nav class="nav">
+          <a class="active" href="#">Overview</a>
+          <a href="#">Alerts</a>
+          <a href="#">Analytics</a>
+          <a href="#">Settings</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Intrusion Detection Overview</h2>
+            <p>Real-time analytics from structured IDS alerts</p>
+          </div>
+          <button id="refreshBtn">Refresh</button>
+        </header>
+
+        <section class="kpi-grid">
+          <div class="card kpi">
+            <span class="kpi-label">Total Alerts</span>
+            <h3 id="totalAlerts">0</h3>
+          </div>
+          <div class="card kpi">
+            <span class="kpi-label">High Severity</span>
+            <h3 id="highSeverityAlerts">0</h3>
+          </div>
+          <div class="card kpi">
+            <span class="kpi-label">Unique Source IPs</span>
+            <h3 id="uniqueIps">0</h3>
+          </div>
+          <div class="card kpi">
+            <span class="kpi-label">Latest Alert</span>
+            <h3 id="latestAlertTime">-</h3>
+          </div>
+        </section>
+
+        <section class="charts-grid">
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3>Attack Type Distribution</h3>
+            </div>
+            <canvas id="attackTypeChart"></canvas>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3>Attack Timeline</h3>
+            </div>
+            <canvas id="timelineChart"></canvas>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3>Top Attackers</h3>
+            </div>
+            <canvas id="topIpChart"></canvas>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3>Severity Distribution</h3>
+            </div>
+            <canvas id="severityChart"></canvas>
+          </div>
+        </section>
+
+        <section class="table-section card">
+          <div class="card-header">
+            <h3>Recent Alerts</h3>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Type</th>
+                  <th>Severity</th>
+                  <th>Source IP</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody id="alertsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

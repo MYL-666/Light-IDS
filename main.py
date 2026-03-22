@@ -3,6 +3,8 @@ from scapy.all import sniff, rdpcap
 from parser.packet_capture import parse_packet, format_packet_summary
 from detection.port_scan import detect_port_scan
 from detection.syn_scan import detect_syn
+from detection.brute_force import detect_bruteforce
+from output.logger import log_alert
 
 def arg_parser():
     parser=argparse.ArgumentParser(description='Capture the pcap file and parsinn')
@@ -18,20 +20,21 @@ def packet_process(packet):
         return 
     print(format_packet_summary(packet_info))
 
-    alert = detect_port_scan(packet_info)
-    if alert:
-        print(f"[ALERT] {alert['message']}")
+    alerts = [
+        detect_port_scan(packet_info),
+        detect_syn(packet_info),
+        detect_bruteforce(packet_info)
+    ]
 
-    syn_alert = detect_syn(packet_info)
-    if syn_alert:
-        print(f"[ALERT] {syn_alert['message']}")
+    for alert in alerts:
+        if alert:
+            log_alert(alert)
 
 def live_capture(interface=None):
     sniff(
         iface=interface,
         prn=packet_process,
         store=False,
-        count=20
     )
 
 def run_pcap_analysis(pcap_file):
